@@ -15,6 +15,14 @@ local setting = {
 	Hiddenv2 = false,
 }
 
+	local s, r = pcall(function()
+		return game.Players.LocalPlayer:WaitForChild("PlayerGui", 3):FindFirstChild(name)
+	end)
+	return s and r or nil
+end
+
+local fling = safeFindGui("GUI") and safeFindGui("GUI"):FindFirstChild("Tabs", true) and safeFindGui("GUI"):FindFirstChild("fling", true)
+
 local function findplr(text)
 	text = text:lower()
 	for _, v in pairs(plrs:GetPlayers()) do
@@ -24,36 +32,38 @@ local function findplr(text)
 	end
 end
 
-fling.FocusLost:Connect(function(enterPressed)
-	if not enterPressed then return end
-	if not fling or not fling.Text then return end
+if fling and fling:IsA("TextBox") then
+	fling.FocusLost:Connect(function(enterPressed)
+		if not enterPressed then return end
+		if not fling.Text or fling.Text == "" then return end
 
-	local tar = findplr(fling.Text)
-	if not tar or not tar.Character then return end
+		local tar = findplr(fling.Text)
+		if not tar or not tar.Character then return end
 
-	local accs = tar.Character:FindFirstChildOfClass("Accessory")
-	if accs then
-		local handle = accs:FindFirstChild("Handle")
-		if handle then
-			plr.Character.Picking:FireServer(handle, Vector3.new(9e37, -9e37, 9e37))
-			task.wait(0.1)
-			plr.Character.PuttingDown:FireServer()
-		elseif accs:IsA("BasePart") then
-			plr.Character.Picking:FireServer(accs, Vector3.new(9e37, -9e37, 9e37))
-			task.wait(0.1)
-			plr.Character.PuttingDown:FireServer()
+		local accs = tar.Character:FindFirstChildOfClass("Accessory")
+		if accs then
+			local handle = accs:FindFirstChild("Handle")
+			if handle then
+				plr.Character.Picking:FireServer(handle, Vector3.new(9e37, -9e37, 9e37))
+				task.wait(0.1)
+				plr.Character.PuttingDown:FireServer()
+			elseif accs:IsA("BasePart") then
+				plr.Character.Picking:FireServer(accs, Vector3.new(9e37, -9e37, 9e37))
+				task.wait(0.1)
+				plr.Character.PuttingDown:FireServer()
+			end
+		else
+			local hrp = tar.Character:FindFirstChild("HumanoidRootPart")
+			if hrp then
+				plr.Character.Picking:FireServer(hrp, Vector3.new(9e37, -9e37, 9e37))
+				task.wait(0.1)
+				plr.Character.PuttingDown:FireServer()
+			end
 		end
-	else
-		local hrp = tar.Character:FindFirstChild("HumanoidRootPart")
-		if hrp then
-			plr.Character.Picking:FireServer(hrp, Vector3.new(9e37, -9e37, 9e37))
-			task.wait(0.1)
-			plr.Character.PuttingDown:FireServer()
-		end
-	end
 
-	fling.Text = ""
-end)
+		fling.Text = ""
+	end)
+end
 
 flingv2.FocusLost:Connect(function(enterPressed)
 	if not enterPressed then return end
