@@ -1,10 +1,3 @@
--- GUI to Lua
------
--- Version: 2.0.
--- Made by chrisopdemobiel.
-
--- Instances:
-
 local GUI = Instance.new("ScreenGui")
 local Container = Instance.new("Frame")
 local Line = Instance.new("Frame")
@@ -47,8 +40,6 @@ local KeybindsB = Instance.new("TextButton")
 local MainB = Instance.new("TextButton")
 local MiscB = Instance.new("TextButton")
 local ToolsB = Instance.new("TextButton")
-
---Properties:
 
 GUI.Name = "GUI"
 GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -533,3 +524,4 @@ ToolsB.TextColor3 = Color3.fromRGB(255, 255, 255)
 ToolsB.TextScaled = true
 ToolsB.TextSize = 14.000
 ToolsB.TextWrapped = true
+
