@@ -1,0 +1,502 @@
+local plrs = game:GetService('Players')
+local plr = plrs.LocalPlayer
+
+local GUI = Instance.new("ScreenGui")
+local Container = Instance.new("Frame")
+local Line = Instance.new("Frame")
+local label = Instance.new("TextLabel")
+local Tabs = Instance.new("Frame")
+--main tab
+local Main = Instance.new("Frame")
+local Antifling = Instance.new("TextButton")
+local fccolor = Instance.new("Frame")
+local AntiVelocity = Instance.new("TextButton")
+local fccolor1 = Instance.new("Frame")
+local AntiAnvil = Instance.new("TextButton")
+local fccolor2 = Instance.new("Frame")
+local FakeAccs = Instance.new("TextButton")
+local fccolor3 = Instance.new("Frame")
+local AntiSpinner = Instance.new("TextButton")
+local fccolor4 = Instance.new("Frame")
+local Kill = Instance.new("TextBox")
+local AntiRagdoll = Instance.new("TextButton")
+local fccolor5 = Instance.new("Frame")
+--tools tab
+local Tools = Instance.new("Frame")
+
+
+local Global = Instance.new("Frame")
+local Misc = Instance.new("Frame")
+local Keybinds = Instance.new("Frame")
+local GlobalB = Instance.new("TextButton")
+local KeybindsB = Instance.new("TextButton")
+local MainB = Instance.new("TextButton")
+local MiscB = Instance.new("TextButton")
+local ToolsB = Instance.new("TextButton")
+
+
+local setting = {
+	Antifling = false,
+	AntiVelocity = false,
+	AntiAnvil = false,
+	FakeAccs = false,
+	AntiSpinner = false,
+    AntiRagdoll = false,
+}
+
+
+GUI.Name = "GUI"
+GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Container.Name = "Container"
+Container.Parent = GUI
+Container.Active = true
+Container.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+Container.BackgroundTransparency = 0.200
+Container.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Container.BorderSizePixel = 0
+Container.Position = UDim2.new(0.112696439, 0, 0.412030578, 0)
+Container.Size = UDim2.new(0, 380, 0, 27)
+
+Line.Name = "Line"
+Line.Parent = Container
+Line.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Position = UDim2.new(0, 0, 1, 0)
+Line.Size = UDim2.new(0, 380, 0, 2)
+
+label.Name = "label"
+label.Parent = Container
+label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+label.BackgroundTransparency = 1.000
+label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+label.BorderSizePixel = 0
+label.Size = UDim2.new(0, 340, 0, 27)
+label.Font = Enum.Font.SourceSans
+label.Text = "Made by Kai (Nezuurr) | Version. 1"
+label.TextColor3 = Color3.fromRGB(208, 208, 208)
+label.TextScaled = true
+label.TextSize = 25.000
+label.TextWrapped = true
+label.TextXAlignment = Enum.TextXAlignment.Left
+
+Tabs.Name = "Tabs"
+Tabs.Parent = Container
+Tabs.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+Tabs.BackgroundTransparency = 1.000
+Tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tabs.BorderSizePixel = 0
+Tabs.Position = UDim2.new(0, 0, 1.07407403, 0)
+Tabs.Size = UDim2.new(0, 380, 0, 240)
+
+Main.Name = "Main"
+Main.Parent = Tabs
+Main.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Main.BackgroundTransparency = 0.200
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Size = UDim2.new(0, 380, 0, 240)
+
+Antifling.Name = "Antifling"
+Antifling.Parent = Main
+Antifling.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Antifling.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Antifling.BorderSizePixel = 0
+Antifling.Position = UDim2.new(0.0210526325, 0, 0.0375000015, 0)
+Antifling.Size = UDim2.new(0, 84, 0, 25)
+Antifling.Font = Enum.Font.SourceSans
+Antifling.Text = "AntiFIing"
+Antifling.TextColor3 = Color3.fromRGB(255, 255, 255)
+Antifling.TextScaled = true
+Antifling.TextSize = 14.000
+Antifling.TextWrapped = true
+
+fccolor.Name = "fccolor"
+fccolor.Parent = Antifling
+fccolor.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor.BorderSizePixel = 0
+fccolor.Position = UDim2.new(0, 0, 1, 0)
+fccolor.Size = UDim2.new(0, 84, 0, 2)
+
+AntiVelocity.Name = "AntiVelocity"
+AntiVelocity.Parent = Main
+AntiVelocity.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiVelocity.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AntiVelocity.BorderSizePixel = 0
+AntiVelocity.Position = UDim2.new(0.265789479, 0, 0.0375000015, 0)
+AntiVelocity.Size = UDim2.new(0, 84, 0, 25)
+AntiVelocity.Font = Enum.Font.SourceSans
+AntiVelocity.Text = "AntiVelocity"
+AntiVelocity.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiVelocity.TextScaled = true
+AntiVelocity.TextSize = 14.000
+AntiVelocity.TextWrapped = true
+
+fccolor1.Name = "fccolor1"
+fccolor1.Parent = AntiVelocity
+fccolor1.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor1.BorderSizePixel = 0
+fccolor1.Position = UDim2.new(0, 0, 1, 0)
+fccolor1.Size = UDim2.new(0, 84, 0, 2)
+
+AntiAnvil.Name = "AntiAnvil"
+AntiAnvil.Parent = Main
+AntiAnvil.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiAnvil.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AntiAnvil.BorderSizePixel = 0
+AntiAnvil.Position = UDim2.new(0.513157904, 0, 0.0375000015, 0)
+AntiAnvil.Size = UDim2.new(0, 84, 0, 25)
+AntiAnvil.Font = Enum.Font.SourceSans
+AntiAnvil.Text = "AntiAnvil"
+AntiAnvil.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiAnvil.TextScaled = true
+AntiAnvil.TextSize = 14.000
+AntiAnvil.TextWrapped = true
+
+fccolor2.Name = "fccolor2"
+fccolor2.Parent = AntiAnvil
+fccolor2.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor2.BorderSizePixel = 0
+fccolor2.Position = UDim2.new(0, 0, 1, 0)
+fccolor2.Size = UDim2.new(0, 84, 0, 2)
+
+FakeAccs.Name = "FakeAccs"
+FakeAccs.Parent = Main
+FakeAccs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+FakeAccs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FakeAccs.BorderSizePixel = 0
+FakeAccs.Position = UDim2.new(0.763157904, 0, 0.0375000015, 0)
+FakeAccs.Size = UDim2.new(0, 84, 0, 25)
+FakeAccs.Font = Enum.Font.SourceSans
+FakeAccs.Text = "FakeAccs"
+FakeAccs.TextColor3 = Color3.fromRGB(255, 255, 255)
+FakeAccs.TextScaled = true
+FakeAccs.TextSize = 14.000
+FakeAccs.TextWrapped = true
+
+fccolor3.Name = "fccolor3"
+fccolor3.Parent = FakeAccs
+fccolor3.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor3.BorderSizePixel = 0
+fccolor3.Position = UDim2.new(0, 0, 1, 0)
+fccolor3.Size = UDim2.new(0, 84, 0, 2)
+
+AntiSpinner.Name = "AntiSpinner"
+AntiSpinner.Parent = Main
+AntiSpinner.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiSpinner.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AntiSpinner.BorderSizePixel = 0
+AntiSpinner.Position = UDim2.new(0.0210526325, 0, 0.191666663, 0)
+AntiSpinner.Size = UDim2.new(0, 84, 0, 25)
+AntiSpinner.Font = Enum.Font.SourceSans
+AntiSpinner.Text = "AntiSpinner"
+AntiSpinner.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiSpinner.TextScaled = true
+AntiSpinner.TextSize = 14.000
+AntiSpinner.TextWrapped = true
+
+fccolor4.Name = "fccolor4"
+fccolor4.Parent = AntiSpinner
+fccolor4.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor4.BorderSizePixel = 0
+fccolor4.Position = UDim2.new(0, 0, 1, 0)
+fccolor4.Size = UDim2.new(0, 84, 0, 2)
+
+Kill.Name = "Kill"
+Kill.Parent = Main
+Kill.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+Kill.BackgroundTransparency = 0.600
+Kill.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Kill.BorderSizePixel = 0
+Kill.Position = UDim2.new(0.265789479, 0, 0.191666663, 0)
+Kill.Size = UDim2.new(0, 84, 0, 25)
+Kill.Font = Enum.Font.SourceSans
+Kill.PlaceholderColor3 = Color3.fromRGB(79, 79, 79)
+Kill.PlaceholderText = "FIingv1"
+Kill.Text = ""
+Kill.TextColor3 = Color3.fromRGB(131, 131, 131)
+Kill.TextScaled = true
+Kill.TextSize = 14.000
+Kill.TextWrapped = true
+
+AntiRagdoll.Name = "AntiRagdoll"
+AntiRagdoll.Parent = game.StarterGui.GUI.Container.Tabs.Main
+AntiRagdoll.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiRagdoll.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AntiRagdoll.BorderSizePixel = 0
+AntiRagdoll.Position = UDim2.new(0.513157904, 0, 0.200000003, 0)
+AntiRagdoll.Size = UDim2.new(0, 84, 0, 25)
+AntiRagdoll.Font = Enum.Font.SourceSans
+AntiRagdoll.Text = "AntiRagdoll"
+AntiRagdoll.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiRagdoll.TextScaled = true
+AntiRagdoll.TextSize = 14.000
+AntiRagdoll.TextWrapped = true
+
+fccolor5.Name = "fccolor5"
+fccolor5.Parent = AntiRagdoll
+fccolor5.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+fccolor5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fccolor5.BorderSizePixel = 0
+fccolor5.Position = UDim2.new(0, 0, 1, 0)
+fccolor5.Size = UDim2.new(0, 84, 0, 2)
+
+Tools.Name = "Tools"
+Tools.Parent = Tabs
+Tools.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Tools.BackgroundTransparency = 0.200
+Tools.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tools.BorderSizePixel = 0
+Tools.Size = UDim2.new(0, 380, 0, 240)
+Tools.Visible = false
+
+Global.Name = "Global"
+Global.Parent = Tabs
+Global.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Global.BackgroundTransparency = 0.200
+Global.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Global.BorderSizePixel = 0
+Global.Size = UDim2.new(0, 380, 0, 240)
+Global.Visible = false
+
+Misc.Name = "Misc"
+Misc.Parent = Tabs
+Misc.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Misc.BackgroundTransparency = 0.200
+Misc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Misc.BorderSizePixel = 0
+Misc.Size = UDim2.new(0, 380, 0, 240)
+Misc.Visible = false
+
+Keybinds.Name = "Keybinds"
+Keybinds.Parent = Tabs
+Keybinds.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Keybinds.BackgroundTransparency = 0.200
+Keybinds.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Keybinds.BorderSizePixel = 0
+Keybinds.Size = UDim2.new(0, 380, 0, 240)
+Keybinds.Visible = false
+
+GlobalB.Name = "GlobalB"
+GlobalB.Parent = Tabs
+GlobalB.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GlobalB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GlobalB.BorderSizePixel = 0
+GlobalB.Position = UDim2.new(0.400000006, 0, 0.88163656, 0)
+GlobalB.Size = UDim2.new(0, 76, 0, 28)
+GlobalB.Font = Enum.Font.SourceSans
+GlobalB.Text = "Global"
+GlobalB.TextColor3 = Color3.fromRGB(255, 255, 255)
+GlobalB.TextScaled = true
+GlobalB.TextSize = 14.000
+GlobalB.TextWrapped = true
+
+KeybindsB.Name = "KeybindsB"
+KeybindsB.Parent = Tabs
+KeybindsB.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeybindsB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+KeybindsB.BorderSizePixel = 0
+KeybindsB.Position = UDim2.new(0.800000012, 0, 0.88163656, 0)
+KeybindsB.Size = UDim2.new(0, 76, 0, 28)
+KeybindsB.Font = Enum.Font.SourceSans
+KeybindsB.Text = "Keybinds"
+KeybindsB.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindsB.TextScaled = true
+KeybindsB.TextSize = 14.000
+KeybindsB.TextWrapped = true
+
+MainB.Name = "MainB"
+MainB.Parent = Tabs
+MainB.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainB.BorderSizePixel = 0
+MainB.Position = UDim2.new(0, 0, 0.88163656, 0)
+MainB.Size = UDim2.new(0, 76, 0, 28)
+MainB.Font = Enum.Font.SourceSans
+MainB.Text = "Main"
+MainB.TextColor3 = Color3.fromRGB(255, 255, 255)
+MainB.TextScaled = true
+MainB.TextSize = 14.000
+MainB.TextWrapped = true
+
+MiscB.Name = "MiscB"
+MiscB.Parent = Tabs
+MiscB.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MiscB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MiscB.BorderSizePixel = 0
+MiscB.Position = UDim2.new(0.600000024, 0, 0.88163656, 0)
+MiscB.Size = UDim2.new(0, 76, 0, 28)
+MiscB.Font = Enum.Font.SourceSans
+MiscB.Text = "Misc"
+MiscB.TextColor3 = Color3.fromRGB(255, 255, 255)
+MiscB.TextScaled = true
+MiscB.TextSize = 14.000
+MiscB.TextWrapped = true
+
+ToolsB.Name = "ToolsB"
+ToolsB.Parent = Tabs
+ToolsB.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToolsB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ToolsB.BorderSizePixel = 0
+ToolsB.Position = UDim2.new(0.200000003, 0, 0.88163656, 0)
+ToolsB.Size = UDim2.new(0, 76, 0, 28)
+ToolsB.Font = Enum.Font.SourceSans
+ToolsB.Text = "Tools"
+ToolsB.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToolsB.TextScaled = true
+ToolsB.TextSize = 14.000
+ToolsB.TextWrapped = true
+
+local function TButton(buttonName, colorFrame)
+	setting[buttonName] = not setting[buttonName] 
+	if setting[buttonName] then
+		colorFrame.BackgroundColor3 = Color3.fromRGB(0, 153, 0) 
+	else
+		colorFrame.BackgroundColor3 = Color3.fromRGB(153, 0, 0) 
+	end
+end
+
+local afc
+local aflr = false
+
+local function taf(state)
+	if state then
+		local p = game:GetService("Players").LocalPlayer
+		local c = p.Character or p.CharacterAdded:Wait()
+
+		local function gw(o) return o:FindFirstChild("ConnectedWeld") end
+		local function ic(w) return w and w.Part1 and w.Part1:IsDescendantOf(p.Character) end
+		local function d(o) local w = gw(o) if ic(w) then o:Destroy() end end
+
+		afc = workspace.DescendantAdded:Connect(function(o)
+			if o.Name == "Stabler" then
+				task.spawn(function()
+					if gw(o) or o:WaitForChild("ConnectedWeld", 10) then d(o) end
+				end)
+			end
+		end)
+
+		local function mp(p) return p:IsA("BasePart") and p.Name ~= "HumanoidRootPart" end
+		local function mm(p) p.Massless = true end
+		local function ma(c) for _,v in ipairs(c:GetDescendants()) do if mp(v) then mm(v) end end end
+
+		local function ga(c) return c:FindFirstChild("ArmAngleChange") end
+		local function cf()
+			return CFrame.new(0.999999583, 0.650959253, 0.0507530943,
+			0.994099438, 0.0974220186, 0.0476996154,
+			-0.0791255683, 0.952069402, -0.295470744,
+			-0.074198693, 0.289953023, 0.954160273)
+		end
+		local function sa(c) local e = ga(c) if e then e:FireServer(cf()) end end
+
+		local function loop()
+			aflr = true
+			while aflr and p.Character == c do
+				ma(c)
+				sa(c)
+				task.wait(0.2)
+			end
+		end
+
+		p.CharacterAdded:Connect(function(nc)
+			c = nc
+			task.spawn(loop)
+		end)
+
+		task.spawn(loop)
+
+	else
+		aflr = false
+		if afc then
+			afc:Disconnect()
+			afc = nil
+		end
+	end
+end
+
+Antifling.MouseButton1Click:Connect(function()
+	TButton("Antifling", fccolor)
+	taf(setting.Antifling)
+end)
+AntiVelocity.MouseButton1Click:Connect(function()
+	TButton("AntiVelocity", fccolor1)
+end)
+
+AntiAnvil.MouseButton1Click:Connect(function()
+	TButton("AntiAnvil", fccolor2)
+end)
+
+FakeAccs.MouseButton1Click:Connect(function()
+	TButton("FakeAccs", fccolor3)
+end)
+
+AntiSpinner.MouseButton1Click:Connect(function()
+	TButton("AntiSpinner", fccolor4)
+end)
+
+AntiRagdoll.MouseButton1Click:Connect(function()
+	TButton("AntiRagdoll", fccolor5)
+end)
+
+
+MainB.MouseButton1Click:Connect(function()
+	Main.Visible = false
+	Tools.Visible = false
+	Global.Visible = false
+	Misc.Visible = false
+	Keybinds.Visible = false
+
+	Main.Visible = true
+end)
+
+ToolsB.MouseButton1Click:Connect(function()
+	Main.Visible = false
+	Tools.Visible = true
+	Global.Visible = false
+	Misc.Visible = false
+	Keybinds.Visible = false
+end)
+
+GlobalB.MouseButton1Click:Connect(function()
+	Main.Visible = false
+	Tools.Visible = false
+	Global.Visible = true
+	Misc.Visible = false
+	Keybinds.Visible = false
+end)
+
+MiscB.MouseButton1Click:Connect(function()
+	Main.Visible = false
+	Tools.Visible = false
+	Global.Visible = false
+	Misc.Visible = true
+	Keybinds.Visible = false
+end)
+
+KeybindsB.MouseButton1Click:Connect(function()
+	Main.Visible = false
+	Tools.Visible = false
+	Global.Visible = false
+	Misc.Visible = false
+	Keybinds.Visible = true
+end)
+
+local function changeLineColor()
+	while true do
+		local r = math.random()
+		local g = math.random()
+		local b = math.random()
+
+		Line.BackgroundColor3 = Color3.fromRGB(r * 255, g * 255, b * 255)
+		task.wait(0.8)
+	end
+end
+
+task.spawn(changeLineColor)
