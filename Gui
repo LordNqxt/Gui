@@ -16,7 +16,84 @@ local setting = {
 	Hiddenv2 = false,
 }
 
+local function waitForTextbox(name)
+	local t = plr:WaitForChild("PlayerGui"):FindFirstChild("GUI", true)
+	if t then return t:WaitForChild(name, 5) end
+end
 
+local fling = waitForTextbox("fling")
+local flingv2 = waitForTextbox("flingv2") 
+local loopfling = waitForTextbox("loopfling") 
+local loopflingv2 = waitForTextbox("loopflingv2") 
+
+local function fplrs(text)
+	text = text:lower()
+	for _, v in pairs(plrs:GetPlayers()) do
+		if v.Name:lower():sub(1, #text) == text or v.DisplayName:lower():sub(1, #text) == text then
+			return v
+		end
+	end
+end
+
+fling.FocusLost:Connect(function(enterPressed)
+	if not enterPressed then return end
+	local tar = fplrs(fling.Text)
+	if not tar or not tar.Character then return end
+	local accs = tar.Character:FindFirstChildOfClass("Accessory")
+	if accs then
+		local handle = accs:FindFirstChild("Handle")
+		if handle then
+			plr.Character.Picking:FireServer(handle, Vector3.new(9e37, -9e37, 9e37))
+			task.wait(0.1)
+			plr.Character.PuttingDown:FireServer()
+		elseif accs:IsA("BasePart") then
+			plr.Character.Picking:FireServer(accs, Vector3.new(9e37, -9e37, 9e37))
+			task.wait(0.1)
+			plr.Character.PuttingDown:FireServer()
+		end
+	else
+		local hrp = tar.Character:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			plr.Character.Picking:FireServer(hrp, Vector3.new(9e37, -9e37, 9e37))
+			task.wait(0.1)
+			plr.Character.PuttingDown:FireServer()
+		end
+	end
+	fling.Text = ""
+end)
+
+flingv2.FocusLost:Connect(function(enterPressed)
+	if not enterPressed then return end
+	local target = fplrs(flingv2.Text)
+	if not target or not target.Character then return end
+	local angle = target.Character:FindFirstChild("ArmAngleChange")
+	if angle then
+		angle:FireServer(CFrame.new(math.huge, -999, -math.huge))
+	end
+	flingv2.Text = ""
+end)
+
+loopfling.FocusLost:Connect(function()
+	local text = loopfling.Text
+	if text ~= "" then
+		local tar = fplrs(text)
+		if tar then
+			flingtargets[tar.Name] = true
+			loopfling.Text = ""
+		end
+	end
+end)
+
+loopflingv2.FocusLost:Connect(function()
+	local text = loopflingv2.Text
+	if text ~= "" then
+		local tar = fplrs(text)
+		if tar then
+			flingv2targets[tar.Name] = true
+			loopflingv2.Text = ""
+		end
+	end
+end)
 
 local GUI = Instance.new("ScreenGui")
 local Container = Instance.new("Frame")
@@ -64,6 +141,7 @@ local ToolsB = Instance.new("TextButton")
 GUI.Name = "GUI"
 GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.ResetOnSpawn = = true
 
 Container.Name = "Container"
 Container.Parent = GUI
@@ -547,14 +625,57 @@ ToolsB.TextScaled = true
 ToolsB.TextSize = 14.000
 ToolsB.TextWrapped = true
 
-local function TButton(buttonName, colorFrame)
-	setting[buttonName] = not setting[buttonName] 
-	if setting[buttonName] then
-		colorFrame.BackgroundColor3 = Color3.fromRGB(0, 153, 0) 
+local buttons = {
+	{btn = Antifling, key = "Antifling", color = fccolor},
+	{btn = AntiVelocity, key = "AntiVelocity", color = fccolor1},
+	{btn = AntiAnvil, key = "AntiAnvil", color = fccolor2},
+	{btn = FakeAccs, key = "FakeAccs", color = fccolor3},
+	{btn = AntiSpinner, key = "AntiSpinner", color = fccolor4},
+	{btn = AntiRagdoll, key = "AntiRagdoll", color = fccolor5},
+	{btn = HackMovement, key = "HackMovement", color = fccolor6},
+	{btn = AntiVoid, key = "AntiVoid", color = fccolor7},
+	{btn = FlingAura, key = "FlingAura", color = fccolor8},
+	{btn = AutoRespawn, key = "AutoRespawn", color = fccolor9},
+	{btn = Hiddenv2, key = "Hiddenv2", color = fccolor10},
+}
+
+local function updateButtonState(key, colorFrame)
+	setting[key] = not setting[key]
+	local state = setting[key]
+	if state then
+		colorFrame.BackgroundColor3 = Color3.fromRGB(0, 153, 0)
 	else
-		colorFrame.BackgroundColor3 = Color3.fromRGB(153, 0, 0) 
+		colorFrame.BackgroundColor3 = Color3.fromRGB(153, 0, 0)
+	end
+	return state
+end
+
+local function connectButtons()
+	for _, data in ipairs(buttons) do
+		data.btn.MouseButton1Click:Connect(function()
+			local state = updateButtonState(data.key, data.color)
+			if data.key == "Antifling" then taf(state)
+			elseif data.key == "AntiVelocity" then tav(state)
+			elseif data.key == "AntiAnvil" then taa(state)
+			elseif data.key == "FakeAccs" then tfa(state)
+			elseif data.key == "AntiSpinner" then tasp(state)
+			elseif data.key == "AntiRagdoll" then tar(state)
+			elseif data.key == "HackMovement" then hm(state)
+			elseif data.key == "AntiVoid" then av(state)
+			elseif data.key == "FlingAura" then fa(state)
+			elseif data.key == "AutoRespawn" then
+				autorespawn = state
+				if state then task.spawn(autor) end
+			elseif data.key == "Hiddenv2" then
+				hidden2on = state
+				if state then task.spawn(runhid) end
+			end
+		end)
 	end
 end
+
+connectButtons()
+
 
 local afc
 local aflr = false
@@ -613,11 +734,6 @@ local function taf(state)
 	end
 end
 
-Antifling.MouseButton1Click:Connect(function()
-	TButton("Antifling", fccolor)
-	taf(setting.Antifling)
-end)
-
 local avlr = false 
 local avLoop
 
@@ -653,11 +769,6 @@ local function tav(state)
 	end
 end
 
-AntiVelocity.MouseButton1Click:Connect(function()
-	TButton("AntiVelocity", fccolor1)
-	tav(setting.AntiVelocity)
-end)
-
 local aalr = false 
 local aaLoop
 
@@ -686,11 +797,6 @@ local function taa(state)
 	end
 end
 
-AntiAnvil.MouseButton1Click:Connect(function()
-	TButton("AntiAnvil", fccolor2)
-	taa(setting.AntiAnvil)
-end)
-
 local falr = false 
 local faLoop
 
@@ -717,12 +823,6 @@ local function tfa(state)
 	end
 end
 
-
-FakeAccs.MouseButton1Click:Connect(function()
-	TButton("FakeAccs", fccolor3)
-	tfa(setting.FakeAccs)
-end)
-
 local aslr = false
 local asLoop
 
@@ -747,11 +847,6 @@ local function tasp(state)
 		aslr = false
 	end
 end
-
-AntiSpinner.MouseButton1Click:Connect(function()
-	TButton("AntiSpinner", fccolor4)
-	tasp(setting.AntiSpinner)
-end)
 
 local arlr = false
 local arLoop
@@ -781,11 +876,6 @@ local function tar(state)
 		arlr = false
 	end
 end
-
-AntiRagdoll.MouseButton1Click:Connect(function()
-	TButton("AntiRagdoll", fccolor5)
-	tar(setting.AntiRagdoll)
-end)
 
 local fly = false
 local loop
@@ -826,16 +916,6 @@ local function hm(state)
 	end
 end
 
-HackMovement.MouseButton1Click:Connect(function()
-	TButton("HackMovement", fccolor6)
-	hm(setting.HackMovement)
-end)
-
-ClearLoop.MouseButton1Click:Connect(function()
-    loopflingActive = false
-    loopflingv2Active = false
-end)
-
 local function av(state)
 	if state then
 		workspace.FallenPartsDestroyHeight = -math.huge
@@ -843,12 +923,6 @@ local function av(state)
 		workspace.FallenPartsDestroyHeight = -500
 	end
 end
-
-AntiVoid.MouseButton1Click:Connect(function()
-	TButton("AntiVoid", fccolor7)
-	av(setting.AntiVoid)
-end)
-
 
 local function fa(state)
 	local run = game:GetService("RunService")
@@ -884,12 +958,6 @@ local function fa(state)
 	end
 end
 
-FlingAura.MouseButton1Click:Connect(function()
-	TButton("FlingAura", fccolor8)
-	fa(setting.FlingAura)
-end)
-
-
 local autorespawn = false
 local rs = game:GetService("RunService")
 local vim = game:GetService("VirtualInputManager")
@@ -922,16 +990,6 @@ local function autor()
     end
 end
 
-AutoRespawn.MouseButton1Click:Connect(function()
-    autorespawn = not autorespawn
-    TButton("AutoRespawn", fccolor9)
-    if autorespawn then
-        task.spawn(autor)
-    end
-end)
-
-
-
 local hidden2on = false
 
 local function rndpos()
@@ -952,13 +1010,6 @@ local function runhid()
 	end
 end
 
-Hiddenv2.MouseButton1Click:Connect(function()
-	hidden2on = not hidden2on
-	TButton("Hiddenv2", fccolor10)
-	if hidden2on then
-		task.spawn(runhid)
-	end
-end)
 
 
 
